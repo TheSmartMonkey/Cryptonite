@@ -1,5 +1,5 @@
 {
-  "main": "dist/index.js",
+  "main": "dist/endpoints.js",
   "scripts": {
     "lint": "eslint src --ext .ts",
     "clear": "rmdir /s \"dist\"",

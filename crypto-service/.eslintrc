@@ -10,11 +10,8 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
-        "@typescript-eslint/explicit-function-return-type": [
-            "warn"
-        ],
-        "@typescript-eslint/semi": [
-            "error", "never"
-        ]
+        "@typescript-eslint/explicit-function-return-type": ["error"],
+        "@typescript-eslint/semi": ["error", "never"],
+        "quotes": [2, "single", { "avoidEscape": true }]
     }
 }
