@@ -1,5 +1,11 @@
-import { cryptowatcherApi } from './../models/api'
+import { cryptowatcherApi } from '../models/api_model'
+import axios from 'axios'
 
-export function getPrice(): void {
-    cryptowatcherApi
+export async function getCryptowatcherData(endpoint: string): Promise<void> {
+    await axios.get(cryptowatcherApi[endpoint]).then((response) => {
+        return response.data
+    }).catch(() => {
+        throw new Error('getCryptowatcherData request error')
+    })
+    // return {}
 }
