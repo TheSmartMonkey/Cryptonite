@@ -4,7 +4,8 @@
     "lint": "eslint src --ext .ts",
     "clear": "rmdir /s \"dist\"",
     "build": "tsc",
-    "start": "npm run build && node ."
+    "start": "npm run build && node .",
+    "watch": "nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node src/endpoints.ts'"
   },
   "dependencies": {
     "axios": "^0.24.0",
@@ -18,6 +19,8 @@
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
     "eslint": "^8.5.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
   }
 }
