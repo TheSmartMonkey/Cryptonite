@@ -1,12 +1,10 @@
-export enum ECryptosId {
-    'btcusd',
-    'btcusdt',
-    'btceur',
-    'egldusd',
-}
+export type CryptoId =
+    'btcusd'|
+    'btcusdt'|
+    'btceur'|
+    'egldusd';
 
-export enum ECryptosName {
-    'bitcoin',
-    'ethereum',
-    'elrond',
-}
+export type CryptoName =
+    'bitcoin'|
+    'ethereum'|
+    'elrond';
