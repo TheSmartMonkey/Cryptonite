@@ -1,37 +1,23 @@
 <template>
   <section>
     <vue-recaptcha sitekey="6LejFrwdAAAAAHyJvbe2uF77QkQhkGOKtSTePO4X" @verify="onCaptchaVerified"></vue-recaptcha>
-    <q-layout view="lHh Lpr lFf">
-      <side-bar/>
-      <q-page-container>  
-        <home/>
-      </q-page-container>
-    </q-layout>
+    <router-view/>
   </section>
+
 </template>
 
-<script>
-  import Home from './components/Home.vue'
-  import SideBar from './sideBar.vue'
+<script>                                                
   import { VueRecaptcha } from 'vue-recaptcha';
   export default {
-    name: 'LayoutDefault',
+    name : "App",
     components: {
-      SideBar,
-      Home,
       VueRecaptcha
     },
-    methods : {
+    methods:{
       onCaptchaVerified : function(){
-          var app = document.getElementById("layoutApp");
-          app.classList.remove('hidden');
-      },
+        this.$router.push("/home");
+      }
     }
   }
 </script>
 
-<style scoped>
-  .hidden {
-    display: none;
-  }
-</style>
