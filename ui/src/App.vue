@@ -8,14 +8,25 @@
 
 <script>                                                
   import { VueRecaptcha } from 'vue-recaptcha';
+  import ProjectManager from './assets/script/ProjectManager';
+
   export default {
     name : "App",
     components: {
       VueRecaptcha
     },
+    data(){
+      return{
+        ProjectManager : new ProjectManager()
+      }
+    },
     methods:{
       onCaptchaVerified : function(){
-        this.$router.push("/home");
+        var self = this;
+        console.log("Capsha verify");
+        this.ProjectManager.initRouter().then(function() {
+          self.$router.push("/home");
+        })
       }
     }
   }
