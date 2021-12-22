@@ -1,16 +1,16 @@
 import { Express, Request } from 'express';
-// import { getCryptowatcherData } from './functions/cryptowatcher';
+// import { getCryptoWatcherData } from './functions/cryptowatcher';
 
-interface IHandelersParameters {
+interface IControllersParameters {
   app: Express;
   port: string;
 }
 
-export class Handlers {
+export class Controllers {
   app: Express;
   port: string;
 
-  constructor(parameters: IHandelersParameters) {
+  constructor(parameters: IControllersParameters) {
     this.app = parameters.app;
     this.port = parameters.port;
   }
@@ -23,7 +23,8 @@ export class Handlers {
 
   async getCryptoPrice(request: Request): Promise<string> {
     try {
-      // await getCryptowatcherData('price');
+      // const response = await getCryptoWatcherData('btcusd', 'price');
+      // console.log('DEBUG: ', response);
       return `PARAMS: ${request.params.cryptoId}`;
     } catch (error) {
       throw new Error(`ERROR getCryptoPrice: ${error}`);

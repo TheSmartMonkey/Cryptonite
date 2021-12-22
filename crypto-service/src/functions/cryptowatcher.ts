@@ -1,12 +1,12 @@
-import { ApiEndpoint } from '../models/api_model';
-import { cryptowatcherApi } from '../models/api_model';
+import { ApiEndpoint, CryptoWatcherUrl } from '../models/api_model';
 import axios from 'axios';
 
-export async function getCryptowatcherData(endpoint: ApiEndpoint): Promise<void> {
-    await axios.get(cryptowatcherApi[endpoint]).then((response) => {
+export async function getCryptoWatcherData(crypto: string, endpoint: ApiEndpoint, market = 'kraken'): Promise<any> {
+    const url = new CryptoWatcherUrl({market, crypto, endpoint});
+    const response = await axios.get(url.createUrl()).then(response => {
         return response.data;
-    }).catch(() => {
-        throw new Error('getCryptowatcherData request error');
+    }).catch(error => {
+        throw new Error(`ERROR getCryptoWatcherData: ${error}`);
     });
-    // return {}
+    return response || {};
 }

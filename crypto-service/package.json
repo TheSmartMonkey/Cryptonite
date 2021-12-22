@@ -5,7 +5,7 @@
     "clear": "rmdir /s \"dist\"",
     "build": "tsc",
     "start": "npm run build && node .",
-    "watch": "nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node src/endpoints.ts'"
+    "watch": "nodemon"
   },
   "dependencies": {
     "axios": "^0.24.0",

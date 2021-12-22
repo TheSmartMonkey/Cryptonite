@@ -1,5 +1,23 @@
-export type ApiEndpoint = 'price';
+export type ApiEndpoint = 'price' | 'summary';
 
-export const cryptowatcherApi: { [endpoint in ApiEndpoint]: string } = {
-    price: 'https://api.cryptowat.ch/markets/kraken/btceur/price'
-};
+interface IUrlParameters {
+    market?: string;
+    crypto: string;
+    endpoint: ApiEndpoint;
+}
+
+export class CryptoWatcherUrl {
+    market?: string;
+    crypto: string;
+    endpoint: ApiEndpoint;
+
+    constructor(parameters: IUrlParameters) {
+        this.market = parameters.market || 'kraken';
+        this.crypto = parameters.crypto;
+        this.endpoint = parameters.endpoint;
+    }
+
+    createUrl(): string {
+        return `https://api.cryptowat.ch/markets/${this.market}/${this.crypto}/${this.endpoint}`;
+    }
+}
