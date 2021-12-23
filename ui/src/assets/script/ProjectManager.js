@@ -1,6 +1,7 @@
 //import Cryptomonaie from './Cryptomonaie/Cryptomonaie';
 import router from '../../router/index';
 import Home from '../../components/Home.vue';
+import CryptomonaieManager from './CryptomonaieManager/CryptomonaieManager';
 
 export default class ProjectManager {
 
@@ -9,7 +10,7 @@ export default class ProjectManager {
     }
 
     collection = {
-        //cryptomonaie : new Cryptomonaie()
+        cryptomonaie : new CryptomonaieManager()
     };
 
     addToColletion(){}
