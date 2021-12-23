@@ -27,6 +27,7 @@
         this.ProjectManager.initRouter().then(function() {
           var capsha = document.getElementById("capsha");
           capsha.classList.add('hidden')
+          self.ProjectManager.initCollection();
           self.$router.push("/home");
         })
       }

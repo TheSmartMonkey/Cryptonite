@@ -1,5 +1,4 @@
 import AbstractCryptomonaie from './AbstractCryptomonaie';
-import BitcoinComponent from '../../../../components/Crypto/Bitcoin.vue';
 
 export default class Bitcoin extends AbstractCryptomonaie {
     constructor(){
@@ -20,10 +19,6 @@ export default class Bitcoin extends AbstractCryptomonaie {
 
     initCollection(){
         
-    }
-
-    initRouter(router){
-        router.addRoute({ name :"Bitcoin", path: '/bitcoin', component: BitcoinComponent })
     }
 
     get parent(){

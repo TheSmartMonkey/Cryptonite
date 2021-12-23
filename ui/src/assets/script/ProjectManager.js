@@ -34,12 +34,4 @@ export default class ProjectManager {
         })
         
     }
-    
-    initialisationProject(){
-        var self = this;
-        return new Promise(resolve => {
-            self.initCollection();
-            resolve(router);
-        })
-    }
 }
