@@ -8,8 +8,6 @@
 
 <script>                                                
   import { VueRecaptcha } from 'vue-recaptcha';
-  import ProjectManager from './assets/script/ProjectManager';
-
   export default {
     name : "App",
     components: {
@@ -17,7 +15,7 @@
     },
     data(){
       return{
-        ProjectManager : new ProjectManager()
+        ProjectManager : window.ProjectManager
       }
     },
     methods:{
@@ -27,7 +25,6 @@
         this.ProjectManager.initRouter().then(function() {
           var capsha = document.getElementById("capsha");
           capsha.classList.add('hidden')
-          self.ProjectManager.initCollection();
           self.$router.push("/home");
         })
       }

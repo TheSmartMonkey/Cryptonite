@@ -2,11 +2,14 @@ export default class AbstractCryptomonaie{
     constructor(){
     }
 
-    initRouter(router){
+    initRouter(router,iconSideBar){
         router.addRoute({ 
-            name :this.constructor.name, 
+            name :{
+                full : this.constructor.name,
+                icon : iconSideBar
+            }, 
             path: '/'+this.constructor.name, 
-            component: import('../../../../components/Crypto/'+this.constructor.name+'.vue')
+            component: import('../../../../components/Crypto/'+this.constructor.name+'.vue'), 
          });
     }
 }
