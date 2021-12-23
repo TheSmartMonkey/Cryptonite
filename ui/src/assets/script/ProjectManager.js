@@ -6,14 +6,22 @@ import CryptomonaieManager from './CryptomonaieManager/CryptomonaieManager';
 export default class ProjectManager {
 
     constructor(){
-
+        this.projectRouter = router;
     }
 
-    collection = {
-        cryptomonaie : new CryptomonaieManager()
-    };
+    collection = {};
 
-    addToColletion(){}
+    initCollection(){
+        this.addToColletion(CryptomonaieManager);
+    }
+
+    addToColletion(instance){
+        var abstractElement = new instance(); 
+        abstractElement.parent = this;
+        abstractElement.router = this.projectRouter;
+        this.collection[instance.name] = abstractElement;
+    }
+
     deleteFromCollection(){}
     updateFromCollection(){}
 
@@ -21,14 +29,16 @@ export default class ProjectManager {
         console.log("Init router");
 
         return new Promise(resolve => {
-            router.addRoute({ path: '/home', component: Home });
+            this.projectRouter.addRoute({ path: '/home', component: Home });
             resolve();
         })
         
     }
     
     initialisationProject(){
+        var self = this;
         return new Promise(resolve => {
+            self.initCollection();
             resolve(router);
         })
     }
