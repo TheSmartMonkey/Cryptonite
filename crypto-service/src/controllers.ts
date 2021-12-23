@@ -1,5 +1,5 @@
 import { Express, Request } from 'express';
-// import { getCryptoWatcherData } from './functions/cryptowatcher';
+import { CryptoWatcher } from './functions/cryptowatcher';
 
 interface IControllersParameters {
   app: Express;
@@ -21,13 +21,29 @@ export class Controllers {
     .map((r: any) => `http://localhost:${this.port}${r.route.path}`);
   }
 
-  async getCryptoPrice(request: Request): Promise<string> {
+  async getCryptoTrades(request: Request): Promise<any> {
     try {
-      // const response = await getCryptoWatcherData('btcusd', 'price');
-      // console.log('DEBUG: ', response);
-      return `PARAMS: ${request.params.cryptoId}`;
+      const crypto = request.params.cryptoId;
+      const cw = new CryptoWatcher({crypto});
+      const response = await cw.request('trades?limit=1000');
+      return {
+        data: cw.formatTrades(response.result)
+      };
     } catch (error) {
-      throw new Error(`ERROR getCryptoPrice: ${error}`);
+      throw new Error(`${error}\n`);
+    }
+  }
+
+  async getCryptoSummary(request: Request): Promise<any> {
+    try {
+      const crypto = request.params.cryptoId;
+      const cw = new CryptoWatcher({crypto});
+      const response = await cw.request('summary');
+      return {
+        data: response.result
+      };
+    } catch (error) {
+      throw new Error(`${error}\n`);
     }
   }
 }

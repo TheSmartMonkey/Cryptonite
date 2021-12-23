@@ -1,23 +1,19 @@
-export type ApiEndpoint = 'price' | 'summary';
-
-interface IUrlParameters {
+export interface ICWParameters {
     market?: string;
     crypto: string;
-    endpoint: ApiEndpoint;
 }
 
-export class CryptoWatcherUrl {
-    market?: string;
-    crypto: string;
-    endpoint: ApiEndpoint;
+export interface ICWRequest {
+    result: any;
+    allowance: {
+        cost: number;
+        remaining: number;
+        upgrade: string;
+    };
+}
 
-    constructor(parameters: IUrlParameters) {
-        this.market = parameters.market || 'kraken';
-        this.crypto = parameters.crypto;
-        this.endpoint = parameters.endpoint;
-    }
-
-    createUrl(): string {
-        return `https://api.cryptowat.ch/markets/${this.market}/${this.crypto}/${this.endpoint}`;
-    }
+export interface ITrades {
+    timestamp: number;
+    price: number;
+    amount: number;
 }
