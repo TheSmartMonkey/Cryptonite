@@ -6,7 +6,6 @@ export default class CryptomonaieManager {
     constructor(){
         this._parent = null;
         this._router = null
-        this.initCollection();
     }
 
     collection = {};

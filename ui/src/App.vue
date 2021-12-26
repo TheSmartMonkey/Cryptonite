@@ -24,6 +24,7 @@
         console.log("Capsha verify");
         this.ProjectManager.initRouter().then(function() {
           var capsha = document.getElementById("capsha");
+          self.ProjectManager.collection.CryptomonaieManager.initCollection();
           capsha.classList.add('hidden')
           self.$router.push("/home");
         })
