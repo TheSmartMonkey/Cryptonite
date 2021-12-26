@@ -12,7 +12,10 @@
 <script>
     import sideBar from '../sideBar.vue'
     export default {
-    components: { sideBar },
+        components: { sideBar },
         name : "Home",
+        
+        created(){
+        }
     }
 </script>
