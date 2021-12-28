@@ -1,4 +1,3 @@
-
 import Bitcoin from './Cryptomonaie/Bitcoin';
 
 export default class CryptomonaieManager {

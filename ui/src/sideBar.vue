@@ -1,24 +1,22 @@
-<template>
+<template id="side-bar">
     <section>
         <q-header elevated class="basic" style="background-color: #419547">
             <q-toolbar>
-                <q-btn
-                flat
+                <q-btn flat
                 dense
                 round
                 @click="leftDrawerOpen = !leftDrawerOpen"
                 aria-label="Menu"
                 icon="menu"
                 />
-
-                <q-toolbar-title>Cryptonite</q-toolbar-title>
+                <q-toolbar-title><router-link to="/home" class="text-white text-bold" style="text-decoration: none;">Cryptonite</router-link></q-toolbar-title>
             </q-toolbar>
         </q-header>
 
         <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="bg-green-1">
             <q-list >
-                <q-item  v-for="route in routes" exact :key="route.path" :to="route.path">
-                    <q-item-section avatar>
+                <q-item  v-for="route in routes" exact :key="route.path" :to="route.path" >
+                    <q-item-section avatar :v-if="route.name.show">
                         <q-icon :name="route.name.icon" />
                     </q-item-section>
                     <q-item-section>

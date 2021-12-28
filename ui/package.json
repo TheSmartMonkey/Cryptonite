@@ -11,6 +11,8 @@
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.6.5",
     "quasar": "^2.0.0",
+    "trading-vue-js": "^1.0.2",
+    "trading-vue3-js": "^1.0.2",
     "vue": "^3.0.0",
     "vue-recaptcha": "^2.0.1",
     "vue-router": "^4.0.0-0"

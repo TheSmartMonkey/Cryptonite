@@ -1,12 +1,10 @@
 <template>
-    <section>
-        <q-layout view="lHh Lpr lFf">
-            <side-bar/>
-            <q-page-container>  
-               
-            </q-page-container>
-        </q-layout>
-    </section>
+    <q-layout view="lHh Lpr lFf">
+        <side-bar/>
+        <q-page-container>  
+            <router-view></router-view>
+        </q-page-container>
+    </q-layout>
 </template>
 
 <script>

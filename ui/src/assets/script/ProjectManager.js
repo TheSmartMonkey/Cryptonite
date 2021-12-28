@@ -2,6 +2,8 @@
 import router from '../../router/index';
 import Home from '../../components/Home.vue';
 import CryptomonaieManager from './CryptomonaieManager/CryptomonaieManager';
+import Bitcoin from '../../components/Crypto/Bitcoin.vue';
+import TradingVue from 'trading-vue-js';
 
 export default class ProjectManager {
 
@@ -45,7 +47,25 @@ export default class ProjectManager {
         console.log("Init router");
         
         return new Promise(resolve => {
-            this.projectRouter.addRoute({ path: '/home', name:{ full : "Home", icon : "home"}, component: Home, icon : "Home" });
+            this.projectRouter.addRoute({ 
+                path: '/home', 
+                name:{ full : "Home", icon : "home", show : false}, 
+                component: Home, 
+                children : [
+                    {
+                        path : '/Bitcoin',
+                        component : {
+                            Bitcoin,
+                            "trading-vue" : TradingVue
+                        },
+                        name : {
+                            full : "Bitcoin",
+                            icon : 'currency_bitcoin',
+                            show : true
+                        },
+                    }
+                ]
+            });
             resolve();
         })
         

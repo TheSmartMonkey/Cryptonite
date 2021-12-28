@@ -6,7 +6,9 @@ import quasarUserOptions from './quasar-user-options';
 import router from "./router";
 var projectManager = new ProjectManager();
 window.ProjectManager = projectManager;
-createApp(App).use(router).use(Quasar, quasarUserOptions).mount('#app');
+
+var app = createApp(App);
+app.use(router).use(Quasar, quasarUserOptions).mount('#app');
 
 
 
