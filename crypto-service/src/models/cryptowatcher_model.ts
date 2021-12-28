@@ -19,19 +19,17 @@ export interface ITrades {
 }
 
 export interface ISummary {
-    result: {
-        price: {
-            last: number;
-            high: number;
-            low: number;
-            change: {
-                percentage: number;
-                absolute: number;
-            };
+    price: {
+        last: number;
+        high: number;
+        low: number;
+        change: {
+            percentage: number;
+            absolute: number;
         };
-        volume: number;
-        volumeQuote: number;
     };
+    volume: number;
+    volumeQuote: number;
 }
 
 export interface IOHLC {

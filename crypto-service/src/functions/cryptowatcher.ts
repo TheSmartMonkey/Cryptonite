@@ -1,6 +1,7 @@
-import { ICWRequest, ICWParameters, ISummary } from '../models/cryptowatcher_model';
+import { ICWRequest, ICWParameters, ISummary, IOHLC } from '../models/cryptowatcher_model';
 import axios from 'axios';
-import { ISummaryDTO, ITradesDTO } from '../models/api_model';
+import { IOHLCDTO, ISummaryDTO, ITradesDTO } from '../models/api_model';
+import { Prediction } from '../predictions/prediction';
 
 export class CryptoWatcher {
     market?: string;
@@ -34,18 +35,34 @@ export class CryptoWatcher {
     }
 
     summaryToDTO(summary: ISummary): ISummaryDTO {
+        const s = {...summary};
         return {
             price: {
-                last: summary.result.price.last.toString(),
-                high: summary.result.price.high.toString(),
-                low: summary.result.price.low.toString(),
+                last: s.price.last.toString(),
+                high: s.price.high.toString(),
+                low: s.price.low.toString(),
                 change: {
-                    percentage: summary.result.price.change.percentage.toString(),
-                    absolute: summary.result.price.change.absolute.toString(),
+                    percentage: s.price.change.percentage.toString(),
+                    absolute: s.price.change.absolute.toString(),
                 }
             },
-            volume: summary.result.volume.toString(),
-            volumeQuote: summary.result.volumeQuote.toString(),
+            volume: s.volume.toString(),
+            volumeQuote: s.volumeQuote.toString(),
+        };
+    }
+
+    ohlcToDTO(ohlc: IOHLC): IOHLCDTO {
+        const data = {...ohlc};
+        const p = new Prediction(data);
+        return {
+            900: data[900],
+            3600: data[3600],
+            14400: data[14400],
+            86400: data[86400],
+            604800: data[604800],
+            predictions: {
+                simple: p.perdict()
+            }
         };
     }
 

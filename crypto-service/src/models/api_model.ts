@@ -1,3 +1,5 @@
+import { IPrediction } from '../predictions/prediction';
+
 export interface ITradesDTO {
     timestamp: string;
     price: string;
@@ -16,4 +18,15 @@ export interface ISummaryDTO {
     };
     volume: string;
     volumeQuote: string;
+}
+
+export interface IOHLCDTO {
+    900: number[][];
+    3600: number[][];
+    14400: number[][];
+    86400: number[][];
+    604800: number[][];
+    predictions: {
+        simple: IPrediction
+    }
 }
