@@ -13,7 +13,7 @@ export class Database {
         });
     }
 
-    async getAll(cryptoId: string): Promise<ITradesDTO[]> {
+    async list(cryptoId: string): Promise<ITradesDTO[]> {
         const response = await this.query(`SELECT * FROM ${cryptoId}`);
         return response;
     }

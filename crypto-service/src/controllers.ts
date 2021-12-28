@@ -2,6 +2,7 @@ import { Express, Request, Response } from 'express';
 import { CryptoWatcher } from './functions/cryptowatcher';
 import { Database } from './functions/database';
 import { ISummaryDTO, ITradesDTO } from './models/api_model';
+import { IOHLC } from './models/cryptowatcher_model';
 
 interface IControllersParameters {
   app: Express;
@@ -37,13 +38,20 @@ export class Controllers {
     const crypto = request.params.cryptoId;
     const cw = new CryptoWatcher({ crypto });
     const response = await cw.request('trades?limit=1000');
-    return cw.formatTrades(response.result);
+    return cw.tradesToDTO(response.result);
   }
 
   async getCryptoSummary(request: Request): Promise<ISummaryDTO> {
     const crypto = request.params.cryptoId;
     const cw = new CryptoWatcher({ crypto });
     const response = await cw.request('summary');
-    return cw.formatSummary(response.result);
+    return cw.summaryToDTO(response.result);
+  }
+
+  async getCryptoOHLC(request: Request): Promise<IOHLC> {
+    const crypto = request.params.cryptoId;
+    const cw = new CryptoWatcher({ crypto });
+    const response = await cw.request('ohlc');
+    return response.result;
   }
 }

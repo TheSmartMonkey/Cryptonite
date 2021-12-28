@@ -21,7 +21,7 @@ export class CryptoWatcher {
         return response || {};
     }
 
-    formatTrades(trades: number[][]): ITradesDTO[] {
+    tradesToDTO(trades: number[][]): ITradesDTO[] {
         const format = [] as ITradesDTO[]; 
         trades.forEach(trade => {
             format.push({
@@ -33,7 +33,7 @@ export class CryptoWatcher {
         return format;
     }
 
-    formatSummary(summary: ISummary): ISummaryDTO {
+    summaryToDTO(summary: ISummary): ISummaryDTO {
         return {
             price: {
                 last: summary.result.price.last.toString(),
