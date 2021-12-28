@@ -1,19 +1,19 @@
-export interface ICWParameters {
-    market?: string;
-    crypto: string;
+export interface ITradesDTO {
+    timestamp: string;
+    price: string;
+    amount: string;
 }
 
-export interface ICWRequest {
-    result: any;
-    allowance: {
-        cost: number;
-        remaining: number;
-        upgrade: string;
+export interface ISummaryDTO {
+    price: {
+        last: string;
+        high: string;
+        low: string;
+        change: {
+            percentage: string;
+            absolute: string;
+        };
     };
-}
-
-export interface ITrades {
-    timestamp: number;
-    price: number;
-    amount: number;
+    volume: string;
+    volumeQuote: string;
 }

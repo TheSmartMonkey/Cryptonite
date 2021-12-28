@@ -1,8 +1,35 @@
-// export interface ICryptowatcherPrice {
-//   result: { price: 43235.1 },
-//   allowance: {
-//     cost: 0.005,
-//     remaining: 9.985,
-//     upgrade: 'For unlimited API access, create an account at https://cryptowat.ch'
-//   }
-// }
+export interface ICWParameters {
+    market?: string;
+    crypto: string;
+}
+
+export interface ICWRequest {
+    result: any;
+    allowance: {
+        cost: number;
+        remaining: number;
+        upgrade: string;
+    };
+}
+
+export interface ITrades {
+    timestamp: number;
+    price: number;
+    amount: number;
+}
+
+export interface ISummary {
+    result: {
+        price: {
+            last: number;
+            high: number;
+            low: number;
+            change: {
+                percentage: number;
+                absolute: number;
+            };
+        };
+        volume: number;
+        volumeQuote: number;
+    };
+}

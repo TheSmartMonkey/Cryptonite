@@ -17,10 +17,17 @@ export class Database {
         });
     }
 
-    getAll(): void {
-        this.db.query('SELECT * FROM cryptonite', (error, result) => {
+    getAll(): any {
+        return this.query('SELECT * FROM btcusd');
+    }
+
+    create(timestamp: number, price: number, amount: number): void {
+        this.query('INSERT INTO btcusd (timestamp, price, amount) VALUE ("35214654", "32000", "0.2")');
+    }
+
+    private query(request: string): void {
+        this.db.query(request, error => {
             if (error) throw new Error(`${error}\n`);
-            console.log(result);
         });
     }
 }

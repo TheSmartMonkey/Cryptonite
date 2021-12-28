@@ -1,6 +1,7 @@
 import { Express, Request, Response } from 'express';
 import { CryptoWatcher } from './functions/cryptowatcher';
 import { Database } from './functions/database';
+import { ISummaryDTO, ITradesDTO } from './models/api_model';
 
 interface IControllersParameters {
   app: Express;
@@ -27,27 +28,22 @@ export class Controllers {
   }
 
   getEndpoints(): string[] {
-    // this.db.getAll();
     return this.app._router.stack
       .filter((r: any) => r.route)
       .map((r: any) => `http://localhost:${this.port}${r.route.path}`);
   }
 
-  async getCryptoTrades(request: Request): Promise<any> {
+  async getCryptoTrades(request: Request): Promise<ITradesDTO[]> {
     const crypto = request.params.cryptoId;
     const cw = new CryptoWatcher({ crypto });
     const response = await cw.request('trades?limit=1000');
-    return {
-      data: cw.formatTrades(response.result)
-    };
+    return cw.formatTrades(response.result);
   }
 
-  async getCryptoSummary(request: Request): Promise<any> {
+  async getCryptoSummary(request: Request): Promise<ISummaryDTO> {
     const crypto = request.params.cryptoId;
     const cw = new CryptoWatcher({ crypto });
     const response = await cw.request('summary');
-    return {
-      data: response.result
-    };
+    return cw.formatSummary(response.result);
   }
 }
