@@ -1,6 +1,6 @@
-import { ICWRequest } from './../models/api_model';
-import { ICWParameters, ITrades } from '../models/api_model';
+import { ICWRequest, ICWParameters, ISummary } from '../models/cryptowatcher_model';
 import axios from 'axios';
+import { ISummaryDTO, ITradesDTO } from '../models/api_model';
 
 export class CryptoWatcher {
     market?: string;
@@ -21,19 +21,36 @@ export class CryptoWatcher {
         return response || {};
     }
 
-    formatTrades(trades: number[][]): ITrades[] {
-        const format = [] as ITrades[]; 
-        trades.forEach(element => {
+    tradesToDTO(trades: number[][]): ITradesDTO[] {
+        const format = [] as ITradesDTO[]; 
+        trades.forEach(trade => {
             format.push({
-                timestamp: element[1],
-                price: element[2],
-                amount: element[3]
+                timestamp: trade[1].toString(),
+                price: trade[2].toString(),
+                amount: trade[3].toString()
             });
         });
         return format;
     }
 
+    summaryToDTO(summary: ISummary): ISummaryDTO {
+        return {
+            price: {
+                last: summary.result.price.last.toString(),
+                high: summary.result.price.high.toString(),
+                low: summary.result.price.low.toString(),
+                change: {
+                    percentage: summary.result.price.change.percentage.toString(),
+                    absolute: summary.result.price.change.absolute.toString(),
+                }
+            },
+            volume: summary.result.volume.toString(),
+            volumeQuote: summary.result.volumeQuote.toString(),
+        };
+    }
+
     private createUrl(endpoint: string): string {
         return `https://api.cryptowat.ch/markets/${this.market}/${this.crypto}/${endpoint}`;
     }
+
 }
