@@ -1,7 +1,7 @@
 import { ICWRequest, ICWParameters, ISummary, IOHLC } from '../models/cryptowatcher_model';
 import axios from 'axios';
 import { IOHLCDTO, ISummaryDTO, ITradesDTO } from '../models/api_model';
-import { Prediction } from '../predictions/prediction';
+import { SimplePredict } from '../predictions/simple_predict';
 
 export class CryptoWatcher {
     market?: string;
@@ -53,7 +53,7 @@ export class CryptoWatcher {
 
     ohlcToDTO(ohlc: IOHLC): IOHLCDTO {
         const data = {...ohlc};
-        const p = new Prediction(data);
+        const sp = new SimplePredict(data);
         return {
             900: data[900],
             3600: data[3600],
@@ -61,7 +61,7 @@ export class CryptoWatcher {
             86400: data[86400],
             604800: data[604800],
             predictions: {
-                simple: p.perdict()
+                simple: sp.perdict()
             }
         };
     }
