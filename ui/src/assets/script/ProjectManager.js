@@ -3,7 +3,6 @@ import router from '../../router/index';
 import Home from '../../components/Home.vue';
 import CryptomonaieManager from './CryptomonaieManager/CryptomonaieManager';
 import Bitcoin from '../../components/Crypto/Bitcoin.vue';
-import TradingVue from 'trading-vue-js';
 
 export default class ProjectManager {
 
@@ -54,10 +53,7 @@ export default class ProjectManager {
                 children : [
                     {
                         path : '/Bitcoin',
-                        component : {
-                            Bitcoin,
-                            "trading-vue" : TradingVue
-                        },
+                        component : Bitcoin,
                         name : {
                             full : "Bitcoin",
                             icon : 'currency_bitcoin',
