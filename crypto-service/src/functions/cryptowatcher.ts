@@ -55,13 +55,14 @@ export class CryptoWatcher {
         const data = {...ohlc};
         const sp = new SimplePredict(data);
         return {
+            60: data[60],
             900: data[900],
             3600: data[3600],
             14400: data[14400],
             86400: data[86400],
             604800: data[604800],
             predictions: {
-                simple: sp.perdict()
+                simple: sp.getPerdiction()
             }
         };
     }

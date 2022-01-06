@@ -21,6 +21,7 @@ export interface ISummaryDTO {
 }
 
 export interface IOHLCDTO {
+    60: number[][],
     900: number[][];
     3600: number[][];
     14400: number[][];
