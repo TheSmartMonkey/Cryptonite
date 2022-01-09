@@ -13,10 +13,6 @@ export default class Bitcoin extends AbstractCryptomonaie {
         return this.parent;
     }
 
-   /* initRouter(router){
-        super.initRouter(router,"currency_bitcoin",BitcoinComponent);
-    }*/
-
     get parent(){
         return this._parent;
     }

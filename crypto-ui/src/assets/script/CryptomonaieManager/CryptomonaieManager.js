@@ -11,10 +11,7 @@ export default class CryptomonaieManager {
     collection = {};
 
     initCollection(){
-        this.addToColletion(Bitcoin).then(abstractElement => {
-            abstractElement.initRouter(this.router)
-        });
-
+        this.addToColletion(Bitcoin);
     }
 
     getParent(){
@@ -22,13 +19,9 @@ export default class CryptomonaieManager {
     }
 
     addToColletion(instance){
-        return new Promise(resolve => {
-            var abstractElement = new instance(); 
-            abstractElement.parent = this;
-            this.collection[instance.name] = abstractElement;
-            resolve(abstractElement)
-        })
-
+        var abstractElement = new instance(); 
+        abstractElement.parent = this;
+        this.collection[instance.name] = abstractElement;
     }
 
     deleteFromCollection(){}

@@ -28,7 +28,7 @@
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/about">
+          <v-list-item to="/Bitcoin">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
@@ -70,12 +70,9 @@ export default {
               component: Home
             },
             {
-              path: '/about',
-              name: 'About',
-              // route level code-splitting
-              // this generates a separate chunk (about.[hash].js) for this route
-              // which is lazy-loaded when the route is visited.
-              component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+              path: '/Bitcoin',
+              name: 'Bitcoin',
+              component: () => import('./views/Bitcoin.vue')
             }
           ])
           resolve();
@@ -86,11 +83,21 @@ export default {
         console.log("Capsha verify");
         this.initRoute().then(function(){
           var capsha = document.getElementById("capsha");
-          capsha.classList.add('hidden')
-          self.$router.push("/");
+          capsha.classList.add('hidden');
           self.ProjectManager.initCollection();
         })
       }
     }
 };
 </script>
+<style scooped>
+  #capsha{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+  }
+  .hidden{
+    display: none !important;
+  }
+</style>
