@@ -19,21 +19,30 @@ export interface ITrades {
 }
 
 export interface ISummary {
-    result: {
-        price: {
-            last: number;
-            high: number;
-            low: number;
-            change: {
-                percentage: number;
-                absolute: number;
-            };
+    price: {
+        last: number;
+        high: number;
+        low: number;
+        change: {
+            percentage: number;
+            absolute: number;
         };
-        volume: number;
-        volumeQuote: number;
     };
+    volume: number;
+    volumeQuote: number;
 }
 
+
+/**
+ * data element arguments:
+ * 0: CloseTime
+ * 1: OpenPrice
+ * 2: HighPrice
+ * 3: LowPrice
+ * 4: ClosePrice
+ * 5: Volume
+ * 6: QuoteVolume
+ */
 export interface IOHLC {
     60: number[][];
     180: number[][];
