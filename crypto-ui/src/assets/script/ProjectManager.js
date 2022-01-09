@@ -1,14 +1,11 @@
 //import Cryptomonaie from './Cryptomonaie/Cryptomonaie';
 import router from '../../router/index';
-import Home from '../../components/Home.vue';
 import CryptomonaieManager from './CryptomonaieManager/CryptomonaieManager';
-import Bitcoin from '../../components/Crypto/Bitcoin.vue';
 
 export default class ProjectManager {
 
     constructor(){
         this.projectRouter = router;
-        this.initCollection();
     }
 
     collection = {};
@@ -41,29 +38,4 @@ export default class ProjectManager {
 
     deleteFromCollection(){}
     updateFromCollection(){}
-
-    initRouter(){
-        console.log("Init router");
-        
-        return new Promise(resolve => {
-            this.projectRouter.addRoute({ 
-                path: '/home', 
-                name:{ full : "Home", icon : "home", show : false}, 
-                component: Home, 
-                children : [
-                    {
-                        path : '/Bitcoin',
-                        component : Bitcoin,
-                        name : {
-                            full : "Bitcoin",
-                            icon : 'currency_bitcoin',
-                            show : true
-                        },
-                    }
-                ]
-            });
-            resolve();
-        })
-        
-    }
 }
