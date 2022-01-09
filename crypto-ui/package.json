@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vue/composition-api": "^1.4.3",
+    "axios": "^0.24.0",
     "core-js": "^3.6.5",
     "trading-vue-js": "^1.0.2",
     "vue": "^2.6.11",

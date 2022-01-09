@@ -5,9 +5,12 @@ export default class Bitcoin extends AbstractCryptomonaie {
     constructor(){
         super();
         this._parent = null;
+        super.getData();
     }
 
-    collection = {};
+    collection = {
+        ohlcv : []
+    };
 
     getParent(){
         return this.parent;

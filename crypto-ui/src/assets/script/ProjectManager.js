@@ -32,8 +32,6 @@ export default class ProjectManager {
         abstractElement.parent = this;
         abstractElement.router = this.projectRouter;
         this.collection[instance.name] = abstractElement;
-
-        console.log(this.collection);
     }
 
     deleteFromCollection(){}
