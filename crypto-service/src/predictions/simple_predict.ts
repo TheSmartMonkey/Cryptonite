@@ -59,14 +59,16 @@ export class SimplePredict extends Prediction {
     private generateFakeData(fakeTrend: number[]): number[][] {
         const data = [] as number[][];
         fakeTrend.forEach(increment => {
-            const i = this.currentPrice + increment;
-            data.push([0, i, i, i, i, 0,]);
+            const i = Math.round(this.currentPrice) + increment;
+            data.unshift([0, i, i, i, i, 0,]);
         });
         return data;
     }
 
     private createPrediction(trendMessage: string): any {
         const scope = 10;
+        console.log('current: ', this.currentPrice);
+        console.log('trendMessage: ', trendMessage);
         let fakeTrend = Array(scope).fill(1);
         if (trendMessage === 'up') {
             fakeTrend = Array.from({length: scope}, (_, i) => i + 1);
