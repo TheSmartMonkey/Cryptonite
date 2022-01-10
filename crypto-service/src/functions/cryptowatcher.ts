@@ -1,6 +1,7 @@
-import { ICWRequest } from './../models/api_model';
-import { ICWParameters, ITrades } from '../models/api_model';
+import { ICWRequest, ICWParameters, ISummary, IOHLC } from '../models/cryptowatcher_model';
 import axios from 'axios';
+import { IOHLCDTO, ISummaryDTO, ITradesDTO } from '../models/api_model';
+import { SimplePredict } from '../predictions/simple_predict';
 
 export class CryptoWatcher {
     market?: string;
@@ -21,19 +22,53 @@ export class CryptoWatcher {
         return response || {};
     }
 
-    formatTrades(trades: number[][]): ITrades[] {
-        const format = [] as ITrades[]; 
-        trades.forEach(element => {
+    tradesToDTO(trades: number[][]): ITradesDTO[] {
+        const format = [] as ITradesDTO[]; 
+        trades.forEach(trade => {
             format.push({
-                timestamp: element[1],
-                price: element[2],
-                amount: element[3]
+                timestamp: trade[1].toString(),
+                price: trade[2].toString(),
+                amount: trade[3].toString()
             });
         });
         return format;
     }
 
+    summaryToDTO(summary: ISummary): ISummaryDTO {
+        const s = {...summary};
+        return {
+            price: {
+                last: s.price.last.toString(),
+                high: s.price.high.toString(),
+                low: s.price.low.toString(),
+                change: {
+                    percentage: s.price.change.percentage.toString(),
+                    absolute: s.price.change.absolute.toString(),
+                }
+            },
+            volume: s.volume.toString(),
+            volumeQuote: s.volumeQuote.toString(),
+        };
+    }
+
+    ohlcToDTO(ohlc: IOHLC): IOHLCDTO {
+        const data = {...ohlc};
+        const sp = new SimplePredict(data);
+        return {
+            60: data[60],
+            900: data[900],
+            3600: data[3600],
+            14400: data[14400],
+            86400: data[86400],
+            604800: data[604800],
+            predictions: {
+                simple: sp.getPerdiction()
+            }
+        };
+    }
+
     private createUrl(endpoint: string): string {
         return `https://api.cryptowat.ch/markets/${this.market}/${this.crypto}/${endpoint}`;
     }
+
 }

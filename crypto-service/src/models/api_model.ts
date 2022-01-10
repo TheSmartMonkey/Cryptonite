@@ -1,19 +1,33 @@
-export interface ICWParameters {
-    market?: string;
-    crypto: string;
+import { IPrediction } from '../predictions/prediction';
+
+export interface ITradesDTO {
+    timestamp: string;
+    price: string;
+    amount: string;
 }
 
-export interface ICWRequest {
-    result: any;
-    allowance: {
-        cost: number;
-        remaining: number;
-        upgrade: string;
+export interface ISummaryDTO {
+    price: {
+        last: string;
+        high: string;
+        low: string;
+        change: {
+            percentage: string;
+            absolute: string;
+        };
     };
+    volume: string;
+    volumeQuote: string;
 }
 
-export interface ITrades {
-    timestamp: number;
-    price: number;
-    amount: number;
+export interface IOHLCDTO {
+    60: number[][],
+    900: number[][];
+    3600: number[][];
+    14400: number[][];
+    86400: number[][];
+    604800: number[][];
+    predictions: {
+        simple: IPrediction
+    }
 }
