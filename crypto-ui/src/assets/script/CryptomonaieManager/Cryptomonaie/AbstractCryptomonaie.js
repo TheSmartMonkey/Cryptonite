@@ -10,7 +10,7 @@ export default class AbstractCryptomonaie{
         console.log(process.env);
 
         console.log("getData");
-        this.instance.get("/crypto/trades/btceur").then(response => {
+        this.instance.get("/crypto/ohlc/btceur").then(response => {
             console.log(response);
         })
     }
