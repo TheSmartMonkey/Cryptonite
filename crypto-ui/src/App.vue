@@ -84,6 +84,7 @@ export default {
         this.initRoute().then(function(){
           var capsha = document.getElementById("capsha");
           capsha.classList.add('hidden');
+          self.$router.push('/');
           self.ProjectManager.initCollection();
         })
       }
