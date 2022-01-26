@@ -93,7 +93,11 @@ export default {
       this.getData(this.time);
     },
     setDataMonaie : function(itemSelected){
+      let self = this;
       this.monaie = itemSelected;
+      this.Bitcoin.getDataCryptoBitcoin(this.monaie).then(response => {
+        self.getData(self.time);
+      });
     },
     getData : function(timeKey){
       this.Collection.ohlcv = this.Bitcoin.collection[timeKey];

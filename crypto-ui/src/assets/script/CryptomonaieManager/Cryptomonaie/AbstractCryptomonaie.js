@@ -12,11 +12,14 @@ export default class AbstractCryptomonaie{
 
     getDataCryptoBitcoin(monaie){
         let self = this;
-        this.instance.get("/crypto/ohlc/"+monaie).then(response => {
-            var data = response.data;
-            for(let i in data){
-                self.addCollection(i,data[i])
-            }
+        return new Promise(resolve => {
+            this.instance.get("/crypto/ohlc/"+monaie).then(response => {
+                var data = response.data;
+                for(let i in data){
+                    self.addCollection(i,data[i])
+                }
+                resolve();
+            })
         })
     }
 }
