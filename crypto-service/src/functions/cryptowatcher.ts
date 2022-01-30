@@ -56,7 +56,7 @@ export class CryptoWatcher {
         const sp = new SimplePredict(data);
         return {
             60: data[60],
-            900: data[900],
+            900: this.updateOHLC(data[60]),
             3600: data[3600],
             14400: data[14400],
             86400: data[86400],
@@ -65,6 +65,20 @@ export class CryptoWatcher {
                 simple: sp.getPerdiction()
             }
         };
+    }
+
+    /**
+     * Update to the good timestamp
+     * @param ohlcElement timestamp element of ohlc
+     * @returns ohlcElement
+     */
+    private updateOHLC(ohlcElement: number[][]): number[][] {
+        const data = [] as number[][];
+        ohlcElement.forEach(element => {
+            element[0] = element[0] * 1000;
+            data.push(element);
+        });
+        return data;
     }
 
     private createUrl(endpoint: string): string {
