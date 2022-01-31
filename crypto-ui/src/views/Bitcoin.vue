@@ -45,8 +45,7 @@
         :color-grid="colors.colorGrid"
         :color-text="colors.colorText"
         :width="this.width" 
-        :height="this.height"
-        :overlays="overlays">
+        :height="this.height">
       </trading-vue>
     </div>
   </section>
@@ -56,7 +55,6 @@
 <script>
 
 import TradingVue from 'trading-vue-js';
-import Grin from '../assets/script/Grin'
 
 export default {
   name: 'Bitcoin',
@@ -64,7 +62,10 @@ export default {
   data: () => ({
     prediction :false,
     Collection : {
-      ohlcv : []
+      "chart" : {
+        "type": "Candles",
+        "data" : [],
+      },
     },
     width: (window.innerWidth-20),
     height: window.innerHeight/2,
@@ -76,13 +77,6 @@ export default {
       colorGrid: '#eee',
       colorText: '#333',
     },
-    overlays: [Grin],
-    items: [
-      { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-      { title: 'Photos', icon: 'mdi-image' },
-      { title: 'About', icon: 'mdi-help-box' },
-    ],
-    right: null,
   }),
   created(){
     this.time = this.Bitcoin.defaultTime,
@@ -123,8 +117,8 @@ export default {
       });
     },
     getData : function(timeKey){
-      this.Collection.ohlcv = this.Bitcoin.collection[timeKey];
-      console.log(this.Collection);
+      let data = this.Bitcoin.collection[timeKey];
+      this.Collection["chart"]["data"] = data;
     },
     onResize() {
         this.width = (window.innerWidth-20)

@@ -16,6 +16,15 @@ export default class AbstractCryptomonaie{
             this.instance.get("/crypto/ohlc/"+monaie).then(response => {
                 var data = response.data;
                 for(let i in data){
+                    let element = data[i]      
+                    /**
+                     * @Remove
+                    */              
+                    for (let j in element){
+                        let data = element[j];
+                        data = data.splice(5,1);
+                    }
+                    /* */
                     self.addCollection(i,data[i])
                 }
                 resolve();
