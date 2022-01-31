@@ -6,7 +6,7 @@ export default class Bitcoin extends AbstractCryptomonaie {
         super();
         this._parent = null;
         this._collection = {};
-        this.defaultMonaie = 'btceur';
+        this.defaultMonaie = 'btcusd';
         this.defaultTime = 86400;
         super.getDataCryptoBitcoin('btceur');
         this.monaie = [

@@ -28,12 +28,19 @@
             outlined
           ></v-select>
         </v-col>
+        <!--<v-checkbox
+          v-model="prediction"
+          label="Ajouter les predictions"
+          color="secondary"
+          hide-details
+          @click="addPredictions()"
+        ></v-checkbox>-->
       </v-row>
     </div>
     <div class="chart">
       <trading-vue 
         :data="Collection"  
-        title-txt="BTCUSD" 
+        :title-txt="monaie" 
         :color-back="colors.colorBack"
         :color-grid="colors.colorGrid"
         :color-text="colors.colorText"
@@ -55,6 +62,7 @@ export default {
   name: 'Bitcoin',
   components: { TradingVue },
   data: () => ({
+    prediction :false,
     Collection : {
       ohlcv : []
     },
@@ -88,6 +96,21 @@ export default {
       window.removeEventListener('resize', this.onResize)
   },
   methods : {
+    addPredictions : function(){
+      localStorage.setItem('collection',)
+      let data = [];
+      let predictedData = this.Bitcoin.collection.predictions.simple[this.time];
+      if(this.prediction){
+        data = this.Bitcoin.collection[this.time];
+        for(let i in predictedData){
+          data.push(predictedData[i]);
+        }    
+      }else{
+        data = this.Bitcoin.collection[this.time];
+      }
+      console.log(data);
+      this.Collection.ohlcv = data
+    },
     setDataTime : function(itemSelected){
       this.time = itemSelected;
       this.getData(this.time);
@@ -95,7 +118,7 @@ export default {
     setDataMonaie : function(itemSelected){
       let self = this;
       this.monaie = itemSelected;
-      this.Bitcoin.getDataCryptoBitcoin(this.monaie).then(response => {
+      this.Bitcoin.getDataCryptoBitcoin(this.monaie).then(function() {
         self.getData(self.time);
       });
     },
