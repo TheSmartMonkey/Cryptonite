@@ -28,13 +28,13 @@
             outlined
           ></v-select>
         </v-col>
-        <!--<v-checkbox
+        <v-checkbox
           v-model="prediction"
           label="Ajouter les predictions"
           color="secondary"
           hide-details
           @click="addPredictions()"
-        ></v-checkbox>-->
+        ></v-checkbox>
       </v-row>
     </div>
     <div class="chart">
@@ -91,19 +91,30 @@ export default {
   },
   methods : {
     addPredictions : function(){
-      localStorage.setItem('collection',)
-      let data = [];
-      let predictedData = this.Bitcoin.collection.predictions.simple[this.time];
       if(this.prediction){
-        data = this.Bitcoin.collection[this.time];
+        localStorage.setItem('oldCollection',JSON.stringify(this.Bitcoin.collection[this.time]));
+      }
+      let data = this.Bitcoin.collection[this.time];
+      let predictedData = this.Bitcoin.collection.predictions.simple[this.time];
+      let lastTimeStamp = data[data.length - 1][0]
+
+      console.log(lastTimeStamp,this.time);
+      for(let i in predictedData){
+        let element = predictedData[i];
+        lastTimeStamp = lastTimeStamp + this.time
+        element[0] = lastTimeStamp
+      }
+      console.log(predictedData);
+      if(this.prediction){
         for(let i in predictedData){
           data.push(predictedData[i]);
         }    
       }else{
-        data = this.Bitcoin.collection[this.time];
+        this.Bitcoin.collection[this.time] =  JSON.parse(localStorage.getItem('oldCollection'));
+        data = JSON.parse(localStorage.getItem('oldCollection'));
       }
       console.log(data);
-      this.Collection.ohlcv = data
+      this.Collection["chart"]["data"] = data
     },
     setDataTime : function(itemSelected){
       this.time = itemSelected;

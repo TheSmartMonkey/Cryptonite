@@ -19,7 +19,8 @@ export default class AbstractCryptomonaie{
                     let element = data[i]      
                     /**
                      * @Remove
-                    */              
+                    */         
+                    if(element["simple"]){ self.addCollection(i,data[i]); continue;}
                     for (let j in element){
                         let data = element[j];
                         data = data.splice(5,1);
