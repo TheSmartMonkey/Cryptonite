@@ -10,7 +10,7 @@ export interface IPrediction {
     604800: number[][];
 }
 
-export class Prediction {
+export abstract class Prediction {
     private ohlc: IOHLC;
     protected prediction: IPrediction;
     protected currentPrice: number;
@@ -20,6 +20,8 @@ export class Prediction {
         this.prediction = this.ohlcToPrediction();
         this.currentPrice = this.prediction['60'].slice(-1)[0][EOHLC.ClosePrice];
     }
+
+    protected abstract getPerdiction(): IPrediction;
 
     /**
      * Get the data from a timezone

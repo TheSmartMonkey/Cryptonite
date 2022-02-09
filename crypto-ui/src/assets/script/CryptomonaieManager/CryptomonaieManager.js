@@ -1,20 +1,17 @@
-
 import Bitcoin from './Cryptomonaie/Bitcoin';
 
 export default class CryptomonaieManager {
 
     constructor(){
         this._parent = null;
-        this._router = null
+        this._router = null;
+        this.initCollection();
     }
 
     collection = {};
 
     initCollection(){
-        this.addToColletion(Bitcoin).then(abstractElement => {
-            abstractElement.initRouter(this.router)
-        });
-
+        this.addToColletion(Bitcoin);
     }
 
     getParent(){
@@ -22,13 +19,9 @@ export default class CryptomonaieManager {
     }
 
     addToColletion(instance){
-        return new Promise(resolve => {
-            var abstractElement = new instance(); 
-            abstractElement.parent = this;
-            this.collection[instance.name] = abstractElement;
-            resolve(abstractElement)
-        })
-
+        var abstractElement = new instance(); 
+        abstractElement.parent = this;
+        this.collection[instance.name] = abstractElement;
     }
 
     deleteFromCollection(){}

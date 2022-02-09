@@ -1,4 +1,4 @@
-# ui cryponite
+# crypto-ui
 
 ## Project setup
 ```
